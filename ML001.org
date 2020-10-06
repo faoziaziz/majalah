@@ -1,0 +1,125 @@
+#+title: Developer C
+#+author: Aziz Amerul Faozi
+
+* Masih relevankah?
+Kita telah mengetahui bahwa sekarang banyak bahasa pemrogrman yang beredar di 
+era sekarang python, C, java, dart[fn:1]. Apakah bahasa C masih bisa diandalkan di
+era sekarang?
+** Framework
+Banyak framework dalam pyhton, java, dart misal django untuk development web API 
+dengan python, java punya spring, javascript punya expressjs dan dart memiliki
+flutter. Sebenarnya C juga memiliki framework yang bisa digunakan misal 
+libmicrohttpd yang dibuat oleh GNU, atau mungkin nghttp2 yang bisa support 
+pada protokol http2. Sayangnya atas nama kemudahan, dokumentasi, dan alasan
+sebenarnya adalah marketing, framework bahasa C tidak lebih tenar dari framework
+bahasa-bahasa yang populer saat ini. C dipandang kurang relevan pada kehidupan
+developer sekarang, lebih banyak membuang waktu, dimana waktu adalah uang.
+Serta kemudahan untuk developing yang masih dirasakan terlalu susah untuk 
+memahami developing yang harus membaca api dan fungsi dari code dalam buatan C.
+C memang imperative tidak support dengan paradigma OOP, walaupun tersedia struct
+dalam bahasa C tapi tidak membuat itu cukup dengan kebutuhan sekarang. 
+Orang lebih suka menggunakan OOP walau sebenarnya dia jarang menggunakan 
+prosedure polimorfisme dan sebagainya, dan membangun sebuah software juga dalam 
+paradigma bahasa C, atas nama pasar itulah saya tidak bisa menjamin bahwa 
+bahasa C masih relevan dengan kehidupan kita sehari-hari.
+
+* Kernel
+Linux memang menjadi salah satu framework paling terkenal di driver. 
+Menyatukan antara managemen konkurensi dengan driver hardware menjadi salah
+satu andalan utama dari kernel linux. Linux dibangun dengan menggunakan bahasa C.
+Memang perlu memahami alokasi memori dan pointer yang terkesan bertele-tele, tapi
+tanpa itu mungkin seorang programmer tidak akan pernah secara bagus memahami
+cara kerja prosesor yang dibangun ketika dia tidak mencobanya dengan bahasa C.
+
+* Emebedded 
+Lalu bagaimana dengan aplikasi lainnya? Kalau kita bisa membangun dengan mudah 
+dengan menggunakan python atau javascript, mengapa kita masih harus menggunakan 
+C? Sayangnya tidak semua aplikasi bagus untuk menggunakan python ataupun javascript,
+salah satu yang bagus adalah aplikasi yang dibangun dengan C memang lebih 
+tidak membutuhkan memory. Ada methode yang disebut cross-compile dan ini 
+memberikan kita memprogram suatu perangkat dari perangkat lain tanpa harus 
+menginstall dependency yang kita perlukan kedalam perangkat tersebut. 
+
+Memang di era 90-an kita mengenal java aplikasi untuk perangkat mobile. Dan 
+memory yang digunakan waktu itu memang sangat sedikit dibanding dengan smartphone
+yang kita miliki sekarang, bukankah itu merupakan satu indikasi bahwa java
+juga memiliki kesempatan yang sama dalam membangun perangkat embedded di 
+era tahun 90-an itu?
+ 
+* MCU atau MPU
+Pilihan untuk menggunakan Microprosesor atau microcontroller juga merupakan 
+suatu agenda dalam perancangan sistem Embedded, kita terkadang membutuhkan 
+perangkat yang tidak memerlukan performa yang tinggi asalkan secara fisik 
+kita menahan segala macam tantangan seperti ketahanan suhu atau aplikasinya harus
+tetap berjalan dengan data yang dikirimkan sedikit. MCU menjadi pilihan utama
+dalam kasus ini. Sayangnya terkadang juga perangkat Edge juga harus memiliki 
+performa untuk memproses sinyal yang komplex seperti sinyal suara yang memiliki
+kecerdasan buatan, dan pada layer session kita harus memprosesnya pada perangkat
+edge tersebut, untuk itu kita memerlukan MPU. 
+
+* Serevolusioner Einstein
+$E=mc^2$ menjadi salah satu produk unggulan dari Albert Einstein. Itu mungkin
+berlaku di Fisika tapi bagaimana dengan bahasa Pemrogramman? Mungkin karena 
+saking banyaknya revolusi yang terjadi sekarang bahasa C menjadi bahasa yang 
+terpinggirkan.
+
+* Emacs
+Editor MACroS merupakan salah satu editor tertua selain vi dan ed. Emacs 
+memang sangat unik dia bisa melalukan banyak hal, bukan hanya bisa digunakan
+untuk membuka file dan mengeditnya tapi juga bisa digunakan sebagai alat untuk
+membuka email, ada juga kecerdasan buata yang membuat anda bisa curhat dengan 
+komputer. Dokumen ini pun saya buat dengan menggunakan Emacs.
+
+** Kemampuan emacs 
+1. Membuat tabel dan digenerator kedalam pdf maupun html.
+
+#+PLOT: title:"Grades in Physics and Mathematics" ind:2 deps:(3 4) type:2d with:histograms set:"yrange [0:]" set:"xlabel 'Student'" set:"ylabel 'grades'" set:"output './img/gnuplot-grades.png'" set:"terminal png size 600,500"
+|---+--------+-------------+---------|
+|   | Grades | Mathematics | Physics |
+|---+--------+-------------+---------|
+| # | Ben    |         9.2 |     9.9 |
+| # | Tom    |         6.7 |     7.7 |
+| # | Tim    |         7.5 |     6.7 |
+| # | Dean   |         8.0 |     7.0 |
+
+* GNU plot
+Plot merupakan sebuah cara untuk merepresentasikan data dalam bentuk visual,
+code berikut adalah contoh penggunakan gnuplot dalam mengenerate plot 2D.
+#+begin_src gnuplot :exports code :file file.png
+reset
+set title "Check"
+set xlabel "X"
+set xrange [-8:8]
+set xtics -8,2,8
+set ylabel "Y"
+set yrange [-20:70]
+set ytics -20,10,70
+f(x) = x**2
+g(x) = x**3
+h(x) = 10*sqrt(abs(x))
+plot f(x) w lp lw 1, g(x) w p lw 2, h(x) w l lw 3
+#+end_src
+Dan berikut adalah contoh plot dari code diatas
+** library C
+Membuat plot adalah salah satu kompetensi yang harus di kuasai oleh para
+data visualisasi. GNU plot memberikan fasilitas itu. Selain itu gnu plot 
+juga bisa digunakan dalam bahasa pemrograman C yang harus di manfaatkan 
+dengan library GTK misalnya. 
+* GTK3
+Untuk membuat sebuah aplikasi dashboard misalkan GTK menyediakan library untuk C.
+Dengan gtk3 kita bisa membuat dashboard windows yang bisa kita manfaatkan sebagai
+alat untuk menampilkan data.
+* Masalah SSH
+
+Suatu hari kita diajak bingung karena kita tidak bisa mengakses ssh melalui
+tunnel SSH untuk itu kita membutuhkan teknik menambahkan pem kedalam 
+sistem linux kita.
+#+BEGIN_SRC
+ssh-add aws.pem
+ssh ubuntu@121.12.12.1
+#+END_SRC
+misal kita memiliki akses keynya pem, maka untuk sekian kalinya anda tidak perlu
+membutuhkan akses ssh lagi
+
+[fn:1] Bahasa tersebut biasanya sering dipakai pada aplikasi populer sekarang, 
+seperti perangkat mobile, web, atau Machine Learning.
